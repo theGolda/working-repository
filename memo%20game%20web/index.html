@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Memory Game plugin</title>
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/prism.css">
+	<link rel="stylesheet" href="memo_game/memo.css">
+</head>
+<body>
+	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+	  
+	  <symbol id="menu" viewBox="0 0 79 52.8">
+			<path id="line1" d="M72.6 12.8H6.4C2.9 12.8 0 9.9 0 6.4v0C0 2.9 2.9 0 6.4 0h66.2C76.1 0 79 2.9 79 6.4v0C79 9.9 76.1 12.8 72.6 12.8z"/>
+			<path id="line2" d="M72.6 32.8H6.4c-3.5 0-6.4-2.9-6.4-6.4v0C0 22.9 2.9 20 6.4 20h66.2c3.5 0 6.4 2.9 6.4 6.4v0C79 29.9 76.1 32.8 72.6 32.8z"/>
+			<path id="line3" d="M72.6 52.8H6.4c-3.5 0-6.4-2.9-6.4-6.4v0C0 42.9 2.9 40 6.4 40h66.2c3.5 0 6.4 2.9 6.4 6.4v0C79 49.9 76.1 52.8 72.6 52.8z"/>
+	  </symbol>
+
+	  <symbol id="close" viewBox="0 0 59.6 59.6">
+			<path d="M38.8,29.8l18.9-18.9c2.5-2.5,2.5-6.6,0-9.1c-2.5-2.5-6.6-2.5-9.1,0L29.8,20.7L10.9,1.9c-2.5-2.5-6.6-2.5-9.1,0
+			c-2.5,2.5-2.5,6.6,0,9.1l18.9,18.9L1.8,48.7c-2.5,2.5-2.5,6.6,0,9.1s6.6,2.5,9.1,0l18.9-18.9l18.9,18.9c2.5,2.5,6.6,2.5,9.1,0
+			c2.5-2.5,2.5-6.6,0-9.1L38.8,29.8z"/>
+	  </symbol>
+
+	  <symbol id="link" viewBox="0 0 482.1 482.1">
+	  	<path d="M455.5 198.2L326.8 326.8c-35.5 35.5-93.1 35.5-128.6 0l-42.9-42.9 42.9-42.9 42.9 42.9c11.8 11.8 31.1 11.8 42.9 0l128.6-128.6c11.8-11.8 11.8-31.1 0-42.9l-42.9-42.9c-11.8-11.8-31.1-11.8-42.9 0l-45.9 45.9c-21.3-12.5-45.5-17.9-69.4-16.3L284 26.6c35.5-35.5 93.1-35.5 128.6 0l42.9 42.9C491 105 491 162.7 455.5 198.2zM201.2 366.7l-45.9 45.9c-11.8 11.8-31.1 11.8-42.9 0l-42.9-42.9c-11.8-11.8-11.8-31 0-42.9l128.6-128.6c11.8-11.8 31.1-11.8 42.9 0l42.9 42.9 42.9-42.9L284 155.3c-35.5-35.5-93.1-35.5-128.6 0L26.7 283.9c-35.5 35.5-35.5 93.1 0 128.7l42.9 42.9c35.5 35.5 93.1 35.5 128.6 0l72.5-72.5C246.7 384.6 222.6 379.2 201.2 366.7z"/>
+	  </symbol>
+	  
+	</svg>
+	<header>
+		<div class="logo">
+			<img src="http://famouslogos.net/wp-content/uploads/2014/02/2013-Hd-Logos.png" alt="Memo Game logo" />
+		</div>
+		<div>
+			<button class="burger btn">
+				<svg viewBox="0 0 79 52.8">
+					<use xlink:href="#menu">
+				</svg>
+				Content
+			</button>
+		</div>
+		<nav>
+			<ul>
+				<li><a href="#" title="" class="preventDefault">Memo Game</a>
+					<ul>
+						<li><a href="#Features" title="">Features</a></li>
+						<li><a href="#Example" title="">Example</a></li>
+					</ul>
+				</li>
+				<li><a href="#" title="" class="preventDefault">How to start</a>
+					<ul>
+						<li><a href="#Adding_files" title="">Adding files</a></li>
+						<li><a href="#HTML_markup" title="">HTML markup</a></li>
+						<li><a href="#Initialize" title="">Script initialization</a></li>
+					</ul>
+				</li>
+				<li><a href="#" title="" class="preventDefault">Plugin customization</a>
+					<ul>
+						<li><a href="#How_to_use_settings" title="">How to use settings</a></li>
+						<li><a href="#Changing_colour_scheme" title="">Changing colour scheme</a></li>
+					</ul>
+				</li>
+				<li><a href="#" title="" class="preventDefault">Available options</a>
+					<ul>
+						<li><a href="#Options-wrapper" title="">wrapper</a></li>
+						<li><a href="#Options-images" title="">images</a></li>
+						<li><a href="#Options-backImage" title="">backImage</a></li>
+						<li><a href="#Options-animation" title="">animation</a></li>
+						<li><a href="#Options-columns" title="">columns</a></li>
+						<li><a href="#Options-cardShape" title="">cardShape</a></li>
+						<li><a href="#Options-time" title="">time</a></li>
+						<li><a href="#Options-message" title="">message</a></li>
+						<li><a href="#Options-deductPoints" title="">deductPoints</a></li>
+						<li><a href="#Options-overlayColour" title="">overlayColour</a></li>
+						<li><a href="#Options-popupColour" title="">popupColour</a></li>
+						<li><a href="#Options-popupAnimation" title="">popupAnimation</a></li>
+						<li><a href="#Options-responsive" title="">responsive</a></li>
+					</ul>
+				</li>				
+			</ul>
+		</nav>
+	</header>
+		
+	<main>
+		<section>
+			<h1>Memo Game - JavaScript plugin</h1>
+			<div class="card">
+				<h3>
+					<a name="Features" class="anchor" href="#Features">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					Features
+				</h3>
+				<p>Memo Game is a plugin that generates.... yadda yadda yadda</p>
+				<p>more yadda yadda</p>
+				<ul>
+					<li>feature1</li>
+					<li>feature2</li>
+					<li>feature3</li>
+					<li>feature4</li>
+				</ul>
+			</div>
+			<div class="card">
+				<h3><a name="Example" class="anchor" href="#Example"></a>Example</h3>
+				<div id="memo-example"></div>
+			</div>
+		</section>
+
+		<section>
+			<h2>How to start using the plugin?</h2>
+			<div class="card">
+				<h3>
+					<a name="Adding_files" class="anchor" href="#Adding_files">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					Adding necessary files
+				</h3>
+				<p>Include plugin’s stylesheet and script file in your project. You can do it either inside &lt;head&gt; tag or just before closing &lt;/body&gt; tag.</p>
+				<pre><code class="language-markup line-numbers">&lt;link rel=&quot;stylesheet&quot; href=&quot;memo.css&quot;&gt;
+&lt;script src=&quot;memo_game/memo.js&quot;&gt;&lt;/script&gt;</code></pre>
+			</div>
+			<div class="card">
+				<h3>
+					<a name="HTML_markup" class="anchor" href="#HTML_markup">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					HTML markup
+				</h3>
+				<p>Firstly you need to prepare your HTML markup. Nothing complicated here, the plugin only needs one empty div* with an ID to hook on and it will do the rest.</p>
+				<pre><code class="language-markup line-numbers">&lt;div id=&quot;memo-wrapper&quot;&gt;&lt;/div&gt;</code></pre>
+				* If no div is specified, plugin is going to append the game to document’s body.
+			</div>
+			<div class="card">
+				<h3>
+					<a name="Initialize" class="anchor" href="#Initialize">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					Initialize the script
+				</h3>
+				<p>You can run the plugin with default options, or customize it to your needs (available options are explained below). To run the plugin you need to add the following code in your script file or an inline script tag.</p>
+				<p>The most basic version, without any settings specified should look something like this:</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame();</code></pre>
+				<p>If you added some custom settings it probably looks more like this:</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({
+	wrapper: 'memo-board',
+	images: [
+		'http://news.nationalgeographic.com/news/2007/04/images/070412-square-nebula.jpg', 
+		'https://upload.wikimedia.org/wikipedia/commons/c/c6/Sierpinski_square.jpg', 
+		'https://pbs.twimg.com/profile_images/553572195390091265/IeHWVVMX.png'
+	],
+	backImage: 'http://vpx.pl/i/2016/08/11/cardback.jpg',
+	responsive: [
+		{
+			breakpoint: 768,
+			columns: 4
+		},
+		{
+			breakpoint: 968,
+			columns: 3
+		},
+		{
+			breakpoint: 1168,
+			columns: 6
+		},
+		{
+			breakpoint: 1268,
+			columns: 8
+		}
+	],
+	animation: 'spin',
+	timer: false,
+	message: {
+		fail: 'Try again test'
+	}
+});</code></pre>
+			</div>
+		</section>
+
+		<section>
+			<h2>Plugin customization</h2>
+			<div class="card">
+				<h3>
+					<a name="How_to_use_settings" class="anchor" href="#How_to_use_settings">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					How to use settings
+				</h3>
+				<p>When you initialize the script you create a new object using a constructor, which accepts one argument – yes, you probably guessed it – this argument is our settings. You can store object with settings in separate variable and use it as an argument, or just write the object straight inside the constructor.</p>
+				<pre><code class="language-javascript line-numbers">var settings = {
+	wrapper: 'memo-example',
+	animation: 'spin'
+};
+var myBoard = new MemoryGame(settings);
+				</code></pre>
+				<p>or</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({wrapper: 'memo-example', animation: 'spin'});</code></pre>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Changing_colour_scheme" class="anchor" href="#Changing_colour_scheme">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					Changing colour scheme
+				</h3>
+				<p>Changing colour scheme is extremely easy; all you need to do is change variable values in SASS file and recompile it. By default $primary is orange and $secondary is yellow, feel free to change it to whatever you like to match your website layout.</p>
+			</div>
+		</section>
+
+		<section>
+			<h2>Available options</h2>
+			<div class="card">
+				<h3>
+					<a name="Options-wrapper" class="anchor" href="#Options-wrapper">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					wrapper
+				</h3>
+				<p>Probably the one you’d like to change straight away. Do you remember that empty div you’ve created in ‘How to start’ section? That’s the time to use it. The game is going to be created inside this div.</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({wrapper: 'memo-example'});</code></pre>
+				<ul>
+					<li>Type: string</li>
+					<li>Default: document’s body</li>
+				</ul>
+				<p>*if you skip this, the game is going to be appended to document’s body.</p>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-images" class="anchor" href="#Options-images">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					images
+				</h3>
+				<p>This should be an array of strings with absolute paths to images you’d like to use in your game. The plugin will automatically create pairs of images and shuffle them, so you don’t need to insert same image twice. You can skip domain name, as that’s what browser assumes on its own. The size of the images might be different, it will be scaled down and matched, however the ratio must be the same! Otherwise the layout will break. So let’s say you use 400x200px image and 200x100px image – that’s fine. But using 400x200px image and 200x400px image is going to break the layout..</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({images: ['/images/card1.jpg', '/images/card2.jpg', '/images/card3.jpg' ]});</code></pre>
+				<ul>
+					<li>Type: array of strings</li>
+					<li>Default: [‘def1.jpg’,  ‘def2.jpg’, ‘def3.jpg’]</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-backImage" class="anchor" href="#Options-backImage">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					backImage
+				</h3>
+				<p>Very similar to option above, but you need only one single string with absolute path to image you want to use as a back for your cards. This image should also have the same ratio as images specified in images setting.</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({backImage: '/images/back.jpg'});</code></pre>
+				<ul>
+					<li>Type: string</li>
+					<li>Default: ‘back.jpg’</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-animation" class="anchor" href="#Options-animation">	
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					animation
+				</h3>
+				<p>There are three different animation effects, when you flip the card, you can choose from: ‘flip’, ‘spin’ and ‘open’. Experiment, and pick one that suits you.</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({animation: 'spin'});</code></pre>
+				<ul>
+					<li>Type: string</li>
+					<li>Default: ‘flip’</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-columns" class="anchor" href="#Options-column">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>					
+					</a>
+					columns
+				</h3>
+				<p>You can specify in how many columns you’d like the cards to be distributed.</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({columns: 4});</code></pre>
+				<ul>
+					<li>Type: integer</li>
+					<li>Default: 2</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-cardShape" class="anchor" href="#Options-cardShape">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>					
+					</a>
+					cardShape
+				</h3>
+				<p>There is a choice of ‘square’ and ‘circle’ shapes</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({cardShape: 'square'});</code></pre>
+				<ul>
+					<li>Type: string</li>
+					<li>Default: ‘circle’</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-time" class="anchor" href="#Options-time">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>					
+					</a>
+					time
+				</h3>
+				<p>Amount of time you allow to solve the puzzle. The number represents minutes so 0.5 = 30sec; 2.25 = 2min 15sec etc.</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({time: 2.5});</code></pre>
+				<ul>
+					<li>Type: integer</li>
+					<li>Default: 0.2</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-message" class="anchor" href="#Options-message">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>				
+					</a>
+					message
+				</h3>
+				<p>This setting is an object containing messages shown when puzzle is solved, failed or when user tries to reset the game.</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({message: {
+				success: 'You solved the puzzle',
+				fail: 'You lost',
+				reset: 'Are you sure?'
+				}});</code></pre>
+				<ul>
+					<li>Type: object</li>
+					<li>Default: {success: 'Well done', fail: 'Try again',  reset: 'Progress will be lost'}</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-deductPoints" class="anchor" href="#Options-deductPoints">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>				
+					</a>
+					deductPoints
+				</h3>
+				<p>If it’s ‘true’, points will be deducted whenever card is flipped.</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({deductPoints: false});</code></pre>
+				<ul>
+					<li>Type: boolean</li>
+					<li>Default: true</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-overlayColour" class="anchor" href="#Options-overlayColour">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					overlayColour
+				</h3>
+				<p>Colour of overlay that appears with popup message. You can choose between ‘dark’ and ‘light’</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({overlayColour: 'light'});</code></pre>
+				<ul>
+					<li>Type: string</li>
+					<li>Default: ‘dark’</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-popupColour" class="anchor" href="#Options-popupColour">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					popupColour
+				</h3>
+				<p>Colour of popup modal. </p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({popupyColour: 'dark'});</code></pre>
+				<ul>
+					<li>Type: string</li>
+					<li>Default: ‘light’</li>
+				</ul>
+			</div>
+
+			<div class="card">
+				<h3>
+					<a name="Options-popupAnimation" class="anchor" href="#Options-popupAnimation">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>					
+					</a>
+					popupAnimation
+				</h3>
+				<p>Choose the direction you’d like the modal to slide. Available options: ‘right’, ‘left’, ‘up’ and ‘down’</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({popupAnimation: 'down'});</code></pre>
+				<ul>
+					<li>Type: string</li>
+					<li>Default: ‘right’’</li>
+				</ul>
+			</div>
+			
+			<div class="card">
+				<h3>
+					<a name="Options-responsive" class="anchor" href="#Options-responsive">
+						<svg viewBox="0 0 482.1 482.1">
+							<use xlink:href="#link">
+						</svg>
+					</a>
+					responsive
+				</h3>
+				<p>Yup. It is responsive. You can specify number of columns at certain breakpoints. It is mobile first. Number of columns at breakpoint 0 – (your first defined breakpoint) will be the number you typed in columns setting or two (default value).</p>
+				<pre><code class="language-javascript line-numbers">var myBoard = new MemoryGame({responsive: [
+				{
+					breakpoint: 768,
+					columns: 4
+				},
+				{
+					breakpoint: 968,
+					columns: 3
+				},
+				{
+					breakpoint: 1168,
+					columns: 6
+				}
+			]});</code></pre>
+				<ul>
+					<li>Type: array of objects</li>
+					<li>Default: []</li>
+				</ul>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		
+	</footer>
+	<script src="memo_game/memo.js"></script>
+	<script src="js/main.js"></script>
+	<script src="js/prism.js"></script>
+</body>
+</html>
